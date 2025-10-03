@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mount Kailash — Jewel of the Snows, Center of the Universe</title>
+    <style>
+        /* --- Google Fonts --- */
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Poppins:wght@300;400;600&display=swap');
+
+        /* --- Variable Definitions (Aesthetic Update) --- */
+        :root {
+            --primary-font: 'Poppins', sans-serif;
+            --serif-font: 'Noto Serif SC', serif;
+            --bg-color: #0a0a0a;
+            --primary-text-color: rgba(255, 255, 255, 0.98);
+            --secondary-text-color: rgba(255, 255, 255, 0.8);
+            --accent-color: #D4AF37;
+            --accent-color-darker: #aa8c2c;
+            --section-bg-color: rgba(12, 12, 12, 0.6);
+            --section-bg-hover: rgba(18, 18, 18, 0.8);
+            --border-color: rgba(255, 255, 255, 0.2);
+            --shadow-color: rgba(0, 0, 0, 0.5);
+        }
+
+        /* --- Base & Reset Styles --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: linear-gradient(rgba(10, 10, 10, 0.6), rgba(10, 10, 10, 0.8)), url('img/9.jpg');
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed;
+            color: var(--primary-text-color);
+            font-family: var(--primary-font);
+            line-height: 1.9;
+            font-weight: 300;
+            overflow-x: hidden;
+            animation: background-breathing 25s ease-in-out infinite;
+        }
+
+        h1, h2, h3 { font-family: var(--serif-font); font-weight: 700; color: var(--primary-text-color); }
+        p { margin-bottom: 1.5rem; color: var(--secondary-text-color); }
+        strong { font-weight: 600; color: var(--accent-color); }
+        
+        /* --- Navigation Bar --- */
+        .navbar {
+            position: fixed; top: 0; left: 0; width: 100%;
+            padding: 1.5rem 5%; display: flex; justify-content: space-between;
+            align-items: center; z-index: 1000;
+            transition: background-color 0.4s ease-in-out, padding 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
+        }
+        .navbar.scrolled {
+            background-color: rgba(10, 10, 10, 0.75);
+            backdrop-filter: blur(15px); padding: 1rem 5%;
+            box-shadow: 0 5px 25px var(--shadow-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .nav-logo {
+            font-family: var(--serif-font); font-size: 1.8rem; font-weight: 700;
+            color: var(--accent-color); text-decoration: none;
+            transition: transform 0.3s ease, text-shadow 0.3s ease;
+        }
+        .nav-logo:hover { transform: scale(1.05); text-shadow: 0 0 15px var(--accent-color); }
+        .nav-links { list-style: none; display: flex; gap: 2.5rem; }
+        .nav-links a {
+            color: var(--primary-text-color); text-decoration: none; font-weight: 400;
+            font-size: 1rem; position: relative; transition: color 0.3s;
+        }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -5px; left: 0;
+            width: 0; height: 2px; background-color: var(--accent-color);
+            transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .nav-links a:hover { color: var(--accent-color); }
+        .nav-links a:hover::after { width: 100%; }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 100vh; position: relative; display: flex; justify-content: center;
+            align-items: center; text-align: center; color: #fff; overflow: hidden;
+        }
+        .hero-background {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; filter: brightness(0.7); z-index: -1;
+        }
+        .hero-content { z-index: 1; max-width: 900px; padding: 2rem; }
+        .hero-content h1 {
+            font-size: clamp(2.8rem, 6vw, 4.8rem); margin-bottom: 1.5rem;
+            line-height: 1.2; text-shadow: 0 0 30px rgba(0,0,0,1);
+            background: linear-gradient(45deg, var(--accent-color), #ffffff);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            animation: fadeInDown 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+        .hero-content p {
+            font-size: clamp(1.1rem, 2vw, 1.3rem); max-width: 700px; margin: 0 auto;
+            color: rgba(255, 255, 255, 0.95); font-weight: 400;
+            text-shadow: 0 0 10px rgba(0,0,0,0.8);
+            animation: fadeInUp 1.2s cubic-bezier(0.25, 1, 0.5, 1) 0.5s forwards;
+            opacity: 0;
+        }
+        .scroll-down {
+            position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+            z-index: 2; color: white; animation: bounce 2.5s infinite;
+        }
+        .scroll-down a { color: inherit; }
+
+        /* --- General Content Section --- */
+        .content-section {
+            padding: 7rem 5%; position: relative; margin: 8rem auto;
+            max-width: 1400px; background: var(--section-bg-color);
+            border: 1px solid var(--border-color); border-radius: 20px;
+            backdrop-filter: blur(15px); box-shadow: 0 15px 45px var(--shadow-color);
+            transition: background 0.4s, transform 0.4s, box-shadow 0.4s;
+        }
+        .content-section:hover {
+            background: var(--section-bg-hover); transform: translateY(-10px);
+            box-shadow: 0 25px 55px var(--shadow-color);
+        }
+        .section-header { text-align: center; margin-bottom: 5rem; }
+        .section-header h2 {
+            font-size: clamp(2.2rem, 5vw, 3.2rem); margin-bottom: 1rem;
+            color: var(--accent-color);
+            text-shadow: 0 0 10px var(--accent-color-darker);
+        }
+        .section-header .subtitle { font-size: 1.2rem; color: var(--secondary-text-color); }
+
+        /* --- Grid Layout --- */
+        .grid-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem; align-items: start; }
+        .grid-item h3 {
+            font-size: 1.8rem; color: var(--accent-color); margin-bottom: 1.5rem;
+            border-left: 4px solid var(--accent-color); padding-left: 1rem;
+            transition: letter-spacing 0.3s;
+        }
+        .grid-item:hover h3 { letter-spacing: 1px; }
+        .grid-item ul { list-style: none; margin-top: 1.5rem; }
+        .grid-item li { padding-left: 1.5rem; position: relative; margin-bottom: 1rem; }
+        .grid-item li::before { content: '✧'; color: var(--accent-color); position: absolute; left: 0; animation: star-shine 2s infinite; }
+        
+        /* --- Carousel Styles --- */
+        .image-container {
+            position: relative; border-radius: 12px; overflow: hidden;
+            margin-top: 2rem; box-shadow: 0 10px 30px var(--shadow-color);
+            transition: box-shadow 0.4s ease, transform 0.4s ease;
+            height: 250px; background-color: #1a1a1a;
+        }
+        .image-container:hover {
+             box-shadow: 0 20px 50px var(--shadow-color);
+             transform: translateY(-10px);
+        }
+        .carousel-track {
+            display: flex;
+            width: 300%; /* (Number of images) * 100% */
+            height: 100%;
+            animation: step-slide 12s steps(1, end) infinite;
+        }
+        .carousel-track img {
+            width: 33.33%; /* 100% / (Number of images) */
+            height: 100%; object-fit: cover; flex-shrink: 0;
+        }
+        .image-container:hover .carousel-track { animation-play-state: paused; }
+
+        /* --- Kora Trek Table --- */
+        .table-container { 
+            overflow: auto; margin-bottom: 4rem; border-radius: 8px; 
+            box-shadow: 0 5px 25px var(--shadow-color);
+            border: 1px solid var(--border-color);
+            background: rgba(0,0,0,0.1);
+        }
+        table { width: 100%; border-collapse: collapse; min-width: 800px; }
+        th, td { padding: 1.5rem; text-align: left; border-bottom: 1px solid var(--border-color); }
+        thead th { 
+            background-color: rgba(212, 175, 55, 0.15); color: var(--accent-color); 
+            font-size: 1.1rem; font-family: var(--serif-font);
+        }
+        tbody tr { transition: background-color 0.3s, transform 0.3s ease; }
+        tbody tr:last-child td { border-bottom: none; }
+        tbody tr:hover { 
+            background-color: rgba(212, 175, 55, 0.2); 
+            transform: scale(1.01);
+            box-shadow: 0 10px 20px var(--shadow-color);
+        }
+        tbody td:first-child { color: var(--accent-color); font-weight: 600; }
+
+        /* --- Preparation Accordion --- */
+        .accordion { max-width: 900px; margin: 0 auto; }
+        .accordion-item { 
+            border-bottom: 1px solid var(--border-color); 
+            transition: margin 0.4s ease, border 0.4s ease;
+        }
+        .accordion-item.active {
+             margin: 1.5rem 0; border: 1px solid var(--accent-color);
+             border-radius: 8px; background-color: rgba(212, 175, 55, 0.05);
+        }
+        .accordion-header {
+            width: 100%; padding: 1.5rem; background: transparent; border: none;
+            color: var(--primary-text-color); font-size: 1.2rem; font-family: var(--serif-font);
+            cursor: pointer; text-align: left; display: flex; justify-content: space-between;
+            align-items: center; transition: background-color 0.3s;
+        }
+        .accordion-item.active .accordion-header { background-color: rgba(212, 175, 55, 0.1); }
+        .accordion-header:hover { background-color: rgba(212, 175, 55, 0.08); }
+        .accordion-header .icon { transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); }
+        .accordion-item.active .accordion-header .icon { transform: rotate(180deg); }
+        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.25, 1, 0.5, 1), padding 0.5s ease; }
+        .accordion-content-inner { padding: 0 1.5rem; }
+        .accordion-item.active .accordion-content { padding: 0 1.5rem 1.5rem 1.5rem; }
+
+        /* --- Footer & Back to Top --- */
+        footer { 
+            padding: 4rem 5%; text-align: center; background-color: transparent;
+            border-top: 1px solid var(--border-color); color: var(--secondary-text-color); 
+            margin-top: 5rem;
+        }
+        #back-to-top {
+            position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px;
+            background-color: var(--accent-color); color: var(--bg-color); border: none;
+            border-radius: 50%; font-size: 1.5rem; display: flex; align-items: center;
+            justify-content: center; cursor: pointer; opacity: 0; visibility: hidden;
+            transform: translateY(20px);
+            transition: opacity 0.4s, visibility 0.4s, transform 0.4s, background-color 0.3s;
+            z-index: 999;
+        }
+        #back-to-top.show { opacity: 0.9; visibility: visible; transform: translateY(0); }
+        #back-to-top:hover { background-color: var(--accent-color-darker); transform: scale(1.1); }
+
+        /* --- Animations --- */
+        @keyframes background-breathing {
+            0%, 100% { background-size: 100% 100%; }
+            50% { background-size: 110% 110%; }
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); }
+            40% { transform: translate(-50%, -20px); }
+            60% { transform: translate(-50%, -8px); }
+        }
+        @keyframes star-shine {
+            0%, 100% { opacity: 0.7; transform: scale(1); text-shadow: 0 0 3px var(--accent-color); }
+            50% { opacity: 1; transform: scale(1.2); text-shadow: 0 0 8px var(--accent-color); }
+        }
+        
+        @keyframes step-slide {
+            0% { transform: translateX(0%); }
+            33.32% { transform: translateX(0%); } /* Image 1 end */
+            33.33% { transform: translateX(-33.33%); } /* Image 2 start */
+            66.65% { transform: translateX(-33.33%); } /* Image 2 end */
+            66.66% { transform: translateX(-66.66%); } /* Image 3 start */
+            100% { transform: translateX(-66.66%); } /* Image 3 end */
+        }
+        
+        .fade-in-section { opacity: 0; transition: opacity 1s ease-out; }
+        .fade-in-section.visible { opacity: 1; }
+        
+        .animated-item {
+            opacity: 0; transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in-section.visible .animated-item {
+            opacity: 1; transform: translateY(0);
+        }
+        .fade-in-section.visible .animated-item:nth-child(2) { transition-delay: 0.15s; }
+        .fade-in-section.visible .animated-item:nth-child(3) { transition-delay: 0.25s; }
+        .fade-in-section.visible .animated-item:nth-child(4) { transition-delay: 0.35s; }
+        .fade-in-section.visible .animated-item:nth-child(5) { transition-delay: 0.45s; }
+        .fade-in-section.visible .animated-item:nth-child(6) { transition-delay: 0.55s; }
+
+    </style>
+</head>
+<body>
+
+    <nav class="navbar" id="navbar">
+        <a href="#home" class="nav-logo">Mt. Kailash</a>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#culture-scenery">Culture & Scenery</a></li>
+            <li><a href="#kora-trek">Trekking & Pilgrimage</a></li>
+            <li><a href="#preparation">Preparation</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="home" class="hero">
+            <img src="8.jpg" alt="Golden sunset on Mount Kailash" class="hero-background" id="hero-bg">
+            <div class="hero-content">
+                <h1>Mount Kailash—Jewel of the Snows, Center of the Universe</h1>
+                <p>Located in the Qiangtang Plateau of Ali, Tibet, at an altitude of approximately 6,638 meters, it is revered by Tibetan Buddhism, Hinduism, Bon, and Jainism as the "Center of the World (Mount Meru)." A single circumambulation is said to cleanse a lifetime of sins, while 108 lead to enlightenment. Embark on the path around Kailash to complete a journey into the depths of your soul.</p>
+            </div>
+            <div class="scroll-down">
+                <a href="#culture-scenery" aria-label="Scroll down">
+                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 21L12 3M12 21L19 14M12 21L5 14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+            </div>
+        </section>
+
+        <section id="culture-scenery" class="content-section fade-in-section">
+            <div class="section-header animated-item">
+                <h2>Peak of Faith: Culture & Scenery</h2>
+                <p class="subtitle">Myths, Symbols, and the Immortal Ice Pyramid</p>
+            </div>
+            <div class="grid-layout">
+                <div class="grid-item animated-item">
+                    <h3>Sacred Significance</h3>
+                    <p>Mount Kailash is shaped like a magnificent <strong>"ice pyramid"</strong> with four symmetrical faces. Four major rivers—the Indus, Sutlej, Brahmaputra, and Karnali—originate from its glaciers.</p>
+                    <ul>
+                        <li><strong>Tibetan Buddhism:</strong> Earthly manifestation of Mount Meru, abode of the deity Chakrasamvara.</li>
+                        <li><strong>Hinduism:</strong> The eternal residence of Lord Shiva and his consort Parvati.</li>
+                        <li><strong>Bon Religion:</strong> The "Nine-Story Swastika Mountain," the spiritual heart of the ancient faith.</li>
+                    </ul>
+                    <p>To preserve its purity, climbing Mount Kailash is strictly forbidden, making it the great <strong>"unconquered" sacred peak</strong> that guards an immortal spiritual mystery.</p>
+                    <div class="image-container">
+                        <div class="carousel-track">
+                           <img src="img/16.jpg" alt="Glacier on the sacred mountain">
+                           <img src="img/9.jpg" alt="Starry night over Mount Kailash">
+                           <img src="img/8.jpg" alt="Golden sunset on the mountain">
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-item animated-item">
+                    <h3>Sacred Mountain & Lakes</h3>
+                    <p>South of the sacred mountain, Lake Manasarovar and Lake Rakshastal coexist, forming a cosmic symbol of <strong>"one sacred, one demonic, in opposition and unity."</strong></p>
+                    <p><strong>Lake Manasarovar</strong>, one of the world's highest freshwater lakes, is hailed as the "Jade Pool of the Western Heaven." Devotees believe its holy water can cleanse the five poisons: greed, anger, ignorance, pride, and jealousy.</p>
+                     <div class="image-container">
+                        <div class="carousel-track">
+                           <img src="img/17.jpg" alt="The sacred Lake Manasarovar">
+                           <img src="img/20.jpg" alt="Shore of Lake Manasarovar">
+                           <img src="img/17.jpg" alt="View of the sacred mountain from the holy lake">
+                        </div>
+                    </div>
+                    <p class="animated-item" style="margin-top: 3rem;"><strong>Lake Rakshastal</strong>, a barren saltwater lake, symbolizes the world's impermanence and chaos. Its shifting colors and restless waves serve as a warning of life's challenges.</p>
+                     <div class="image-container animated-item">
+                        <div class="carousel-track">
+                            <img src="img/18.jpg" alt="The ghost lake Rakshastal">
+                            <img src="img/21.jpg" alt="Waves on Lake Rakshastal">
+                            <img src="img/18.jpg" alt="Lake Rakshastal under cloudy skies">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="kora-trek" class="content-section fade-in-section">
+            <div class="section-header animated-item">
+                <h2>A Soul's Journey: Trekking & Pilgrimage</h2>
+                <p class="subtitle">The Physical Challenge and Spiritual Cleansing of the Outer Kora</p>
+            </div>
+
+            <div class="animated-item">
+                <h3>Classic 3-Day Outer Kora Itinerary</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Day</th>
+                                <th>Route Details</th>
+                                <th>Distance</th>
+                                <th>Elevation Change</th>
+                                <th>Key Highlights</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Day 1</td>
+                                <td>Darchen → Chuku Monastery → Dirapuk Monastery</td>
+                                <td>~20km</td>
+                                <td>4560m → 5080m</td>
+                                <td>Prayer Flag Square, Two-Legged Stupa, Views of North/West Face</td>
+                            </tr>
+                            <tr>
+                                <td>Day 2</td>
+                                <td>Dirapuk Monastery → Drolma La Pass → Zuthulphuk Monastery</td>
+                                <td>~22km</td>
+                                <td>5080m → <strong>5630m</strong> (Highest Point) → 4790m</td>
+                                <td>Drolma La Pass, Sky Burial Site, Gauri Kund (Lake of Compassion)</td>
+                            </tr>
+                            <tr>
+                                <td>Day 3</td>
+                                <td>Zuthulphuk Monastery → Zongdui → Darchen</td>
+                                <td>~10km</td>
+                                <td>4790m → 4560m</td>
+                                <td>Gentle descent through Zongqu Valley, 3-4 hours to finish</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="grid-layout">
+                <div class="grid-item animated-item">
+                    <h3>Forms of Pilgrimage</h3>
+                    <p>Beyond standard trekking, there are more profound methods of pilgrimage:</p>
+                    <ul>
+                        <li><strong>Inner Kora:</strong> Only accessible after 13 outer circuits, this path ventures deep into the mountain's core.</li>
+                        <li><strong>Prostration:</strong> Measuring the sacred path with one's body, taking 15-20 days to complete one circuit.</li>
+                        <li><strong>Saga Dawa Festival:</strong> On the 15th day of the 4th Tibetan month, one kora is said to equal thirteen on normal days.</li>
+                    </ul>
+                    <div class="image-container">
+                        <div class="carousel-track">
+                            <img src="img/5.jpg" alt="Pilgrim performing prostrations">
+                            <img src="img/5.jpg" alt="Devotees on the Kora pilgrimage">
+                            <img src="img/13.jpg" alt="Devotees during the Saga Dawa Festival">
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-item animated-item">
+                    <h3>The Core Challenge: Drolma La Pass</h3>
+                    <p>At <strong>5,630 meters</strong>, Drolma La Pass is the highest point of the kora and a "pass of life and death." Crossing it signifies a symbolic "death and rebirth." The thin air tests the body, while the sea of prayer flags carries the wishes of countless souls, creating an unforgettable spiritual climax to the journey.</p>
+                    <div class="image-container">
+                         <div class="carousel-track">
+                            <img src="img/19.jpg" alt="Trekkers crossing Drolma La Pass">
+                            <img src="img/19.jpg" alt="Prayer flags at Drolma La Pass">
+                            <img src="img/19.jpg" alt="View of the Kora path towards the pass">
+                         </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid-layout animated-item" style="margin-top: 5rem; border-top: 1px solid var(--border-color); padding-top: 5rem;">
+                <div class="grid-item">
+                    <h3>The Soul's Trial: Stone of Rebirth</h3>
+                    <p>During the arduous journey over Drolma La Pass, pilgrims encounter a massive rock known as the "Stone of Rebirth." It forms a natural archway, testing every devotee who passes.</p>
+                    <p>Legend holds that only the sinless and devout can pass through the narrow gap beneath it. This process is seen as a test of one's <strong>karma</strong>. Squeezing through symbolizes the cleansing of a lifetime's sins, achieving spiritual purification and a new beginning. It is a dual challenge of physical flexibility and inner faith.</p>
+                </div>
+                <div class="grid-item">
+                    <div class="image-container">
+                        
+                         <div class="carousel-track">
+                            <img src="img/4.jpg" alt="Close-up of the Stone of Rebirth">
+                            <img src="img/22.jpg" alt="A devotee attempting to pass through the Stone of Rebirth">
+                            <img src="img/4.jpg" alt="View of the Stone of Rebirth and the Kora path">
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="preparation" class="content-section fade-in-section">
+            <div class="section-header animated-item">
+                <h2>Preparation — High-Altitude Survival Guide</h2>
+                <p class="subtitle">Ensuring a Safe and Smooth Pilgrimage</p>
+            </div>
+            <div class="accordion animated-item">
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>Permits / Timing / Costs</span>
+                        <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19 9L12 16L5 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <p><strong>Permits:</strong> Foreign travelers need several permits, including the Tibet Travel Permit. Ensure your tour operator arranges these well in advance, specifying "Ali Prefecture."</p>
+                            <p><strong>Best Time:</strong> May to October. The golden seasons are <strong>May-June & September-October</strong> for fewer crowds and great weather. July-August is the rainy season but has the most available supplies.</p>
+                            <p><strong>Costs:</strong> Major expenses include entrance fees for the Kailash area, plus optional costs for hiring yaks/porters and a guide.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>Altitude Sickness & Safety</span>
+                        <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19 9L12 16L5 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <p><strong>Acclimatization:</strong> Spend 3-5 days in Lhasa/Shigatse upon arrival, and another 1-2 days at Darchen (the trek's starting point) before starting. Do not rush.</p>
+                            <p><strong>Essential Medicine:</strong> Portable oxygen, Diamox (Acetazolamide), Ibuprofen (for headaches), and medication for stomach issues.</p>
+                            <p><strong>Pacing:</strong> Maintain a steady, slow pace. Always go slower than you think you need to. Drink plenty of hot water, eat small, frequent meals, and avoid overeating.</p>
+                            <p><strong>Emergencies:</strong> If severe symptoms of altitude sickness appear, you must stop immediately and descend. <strong>Always trek with a companion</strong>.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <span>Essential Gear Checklist</span>
+                        <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19 9L12 16L5 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="accordion-content-inner">
+                            <p><strong>Clothing:</strong> Use the three-layer system: a moisture-wicking base layer + a fleece/down mid-layer + a waterproof/windproof hard shell outer layer.</p>
+                            <p><strong>Footwear:</strong> Waterproof, high-ankle trekking boots are essential. Pair them with thick wool socks for maximum protection and warmth.</p>
+                            <p><strong>Warmth:</strong> A sleeping bag rated for -10°C comfort, a warm hat, thick gloves, and a balaclava/buff.</p>
+                            <p><strong>Food & Drink:</strong> High-energy snacks like chocolate, energy bars, and nuts; an insulated flask of at least 1L.</p>
+                            <p><strong>Other:</strong> A bright headlamp, high-UV protection sunglasses, SPF 50+ sunscreen, trekking poles, a power bank, and some cash.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Mount Kailash Sacred Mountain Showcase. All rights reserved.</p>
+    </footer>
+    
+    <button id="back-to-top" aria-label="Back to top">
+         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 3L12 21M12 3L5 10M12 3L19 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const navbar = document.getElementById('navbar');
+            const heroBg = document.getElementById('hero-bg');
+            const backToTopButton = document.getElementById('back-to-top');
+            
+            window.addEventListener('scroll', () => {
+                const scrollY = window.scrollY;
+                if (scrollY > 50) navbar.classList.add('scrolled');
+                else navbar.classList.remove('scrolled');
+                if(heroBg) heroBg.style.transform = `translateY(${scrollY * 0.4}px) scale(1.1)`;
+                if (scrollY > 300) backToTopButton.classList.add('show');
+                else backToTopButton.classList.remove('show');
+            });
+
+            backToTopButton.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            const accordionItems = document.querySelectorAll('.accordion-item');
+            accordionItems.forEach(item => {
+                const header = item.querySelector('.accordion-header');
+                const content = item.querySelector('.accordion-content');
+                
+                header.addEventListener('click', () => {
+                    const isActive = item.classList.contains('active');
+                    
+                    accordionItems.forEach(i => {
+                        if (i !== item) {
+                            i.classList.remove('active');
+                            i.querySelector('.accordion-content').style.maxHeight = null;
+                        }
+                    });
+
+                    if (!isActive) {
+                        item.classList.add('active');
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                    } else {
+                        item.classList.remove('active');
+                        content.style.maxHeight = null;
+                    }
+                });
+            });
+
+            const faders = document.querySelectorAll('.fade-in-section');
+            const appearOptions = { threshold: 0.1, rootMargin: "0px 0px -100px 0px" };
+            
+            const appearOnScroll = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        const items = entry.target.querySelectorAll('.animated-item');
+                        items.forEach((item, index) => {
+                            item.style.transitionDelay = `${index * 0.15}s`;
+                        });
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, appearOptions);
+
+            faders.forEach(fader => {
+                const children = Array.from(fader.children);
+                children.forEach(child => {
+                    child.classList.add('animated-item');
+                });
+                appearOnScroll.observe(fader);
+            });
+        });
+    </script>
+</body>
+</html>
